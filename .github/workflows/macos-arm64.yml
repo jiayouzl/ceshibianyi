@@ -40,9 +40,6 @@ jobs:
     # 使用运行器的终端来运行一个命令
     - name: Install dependencies
       run: |
-        echo "当前处理器架构开始"
-        echo $RUNNER_NAME
-        echo "当前处理器架构结束"
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # 使用运行器的终端运行一组命令
