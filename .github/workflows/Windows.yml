@@ -1,0 +1,45 @@
+name: Windows
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    environment: build
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip win]')"
+
+    strategy:
+      matrix:
+        os: [windows-2022]
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.9.12
+      uses: actions/setup-python@v3
+      with:
+        python-version: "3.9.12"
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+    - name: Build
+      run: |
+        rm -rf build
+        rm -rf dist
+        rm -rf app.spec
+        pyinstaller -F --clean ./app.py
+    #- name: Create Zip Package # 创建压缩包
+    #  run: |
+    #    zip -r ./dist/MacOS_ARM64.zip ./dist/app
+    - name: Upload Artifact # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
+      uses: actions/upload-artifact@v3
+      with:
+        name: Win
+        path: ./dist/app.exe # 上传 dist 目录下的 app 执行文件
