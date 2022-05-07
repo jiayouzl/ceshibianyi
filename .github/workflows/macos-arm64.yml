@@ -1,4 +1,4 @@
-name: Build MacOS 12 Arm64 Application Python
+name: mac-arm
 
 on:
   push:
@@ -11,7 +11,13 @@ permissions:
 
 jobs:
   build:
-    runs-on: macos-12
+    runs-on: ${{ matrix.os }}
+    environment: build
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip mac]') && !contains(github.event.head_commit.message, '[skip arm]')"
+
+    strategy:
+      matrix:
+        os: [macos-12]
 
     steps:
     - uses: actions/checkout@v3
@@ -29,11 +35,11 @@ jobs:
         rm -rf dist
         rm -rf app.spec
         pyinstaller -F --clean ./app.py
-    - name: Create Zip Package # 创建压缩包
-      run: |
-        zip -r ./dist/MacOS_ARM64.zip ./dist/app
+    #- name: Create Zip Package # 创建压缩包
+    #  run: |
+    #    zip -r ./dist/MacOS_ARM64.zip ./dist/app
     - name: Upload Artifact # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
       uses: actions/upload-artifact@v3
       with:
-        name: build_output
-        path: dist # 上传 dist 目录
+        name: MacOS_ARM64
+        path: ./dist/app # 上传 dist 目录下的 app 执行文件
