@@ -31,9 +31,6 @@ jobs:
         pip install -r requirements.txt
     - name: Build
       run: |
-        rm -rf build
-        rm -rf dist
-        rm -rf app.spec
         pyinstaller -F --clean ./app.py
     #- name: Create Zip Package # 创建压缩包
     #  run: |
