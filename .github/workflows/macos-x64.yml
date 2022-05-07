@@ -1,10 +1,15 @@
 name: mac-x64
 
+# 控制工作流何时运行
 on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+#   # 当 `push` 或 `pull request` 事件发生时就触发工作流的执行，这里仅仅针对 `master` 分支
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
+
+# 允许用于在 `Actions` 标签页中手动运行工作流
+  workflow_dispatch:
 
 permissions:
   contents: read
