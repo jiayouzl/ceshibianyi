@@ -23,7 +23,7 @@ jobs:
     # 执行作业所需的运行器 runner
     runs-on: ${{ matrix.os }}
     environment: build
-    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip mac]') && !contains(github.event.head_commit.message, '[skip arm]')"
+    #if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[skip mac]') && !contains(github.event.head_commit.message, '[skip arm]')"
 
     strategy:
       matrix:
@@ -40,6 +40,9 @@ jobs:
     # 使用运行器的终端来运行一个命令
     - name: Install dependencies
       run: |
+        echo "当前处理器架构开始"
+        echo $RUNNER_NAME
+        echo "当前处理器架构结束"
         python -m pip install --upgrade pip
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     # 使用运行器的终端运行一组命令
