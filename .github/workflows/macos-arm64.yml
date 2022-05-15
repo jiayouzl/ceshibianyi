@@ -26,7 +26,7 @@ jobs:
   # 当前的工作流仅包含一个作业，作业 id 是 "build"
   build:
     # 执行作业所需的运行器 runner
-    runs-on: [self-hosted, macOS, arm64]
+    runs-on: [macOS, arm64]
     environment: build
 
 #     strategy:
