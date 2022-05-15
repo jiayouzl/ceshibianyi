@@ -16,17 +16,22 @@ on:
 permissions:
   contents: read
 
+#默认配置
+defaults:
+  run:
+    shell: "/usr/bin/arch -arch arm64e /bin/bash --noprofile --norc -eo pipefail {0}"
+
 # 工作流由一个或多个作业( job )组成，这些作业可以顺序运行也可以并行运行
 jobs:
   # 当前的工作流仅包含一个作业，作业 id 是 "build"
   build:
     # 执行作业所需的运行器 runner
-    runs-on: ${{ matrix.os }}
+    runs-on: [self-hosted, macOS, arm64]
     environment: build
 
-    strategy:
-      matrix:
-        os: [macos-12]
+#     strategy:
+#       matrix:
+#         os: [macos-12]
 
     # 执行作业所需的运行器 runner
     steps:
