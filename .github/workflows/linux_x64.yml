@@ -1,4 +1,4 @@
-name: linux
+name: linux_x64
 
 # 控制工作流何时运行
 on:
@@ -45,5 +45,5 @@ jobs:
     - name: Upload Artifact # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
       uses: actions/upload-artifact@v3
       with:
-        name: Linux
+        name: Linux_x64
         path: ./dist/app # 上传 dist 目录下的 app 执行文件
