@@ -25,11 +25,11 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python 3.9.12
+    - name: Set up Python 3.9.13
       uses: actions/setup-python@v3
       with:
         #要使用的Python版本的版本范围或确切版本，使用SemVer的版本范围语法
-        python-version: "3.9.12"
+        python-version: "3.9.13"
         #可选x64或x86。如果未指定，默认值为x64
         architecture: "x86"
     - name: Install dependencies
