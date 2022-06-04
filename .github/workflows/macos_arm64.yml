@@ -1,6 +1,13 @@
+# 下面是一个基础的工作流，你可以基于它来编写自己的 Github Actions
 name: MacOS_arm64
 
+# 控制工作流何时运行
 on:
+#   # 当 `push` 或 `pull request` 事件发生时就触发工作流的执行，这里仅仅针对 `master` 分支
+#   push:
+#     branches: [ master ]
+#   pull_request:
+#     branches: [ master ]
 
 # 允许用于在 `Actions` 标签页中手动运行工作流
   workflow_dispatch:
@@ -9,10 +16,18 @@ on:
 permissions:
   contents: read
 
+# 工作流由一个或多个作业( job )组成，这些作业可以顺序运行也可以并行运行
 jobs:
-  build-on-mac-m1:
-    runs-on: [self-hosted, macOS, arm64]
-        
+  # 当前的工作流仅包含一个作业，作业 id 是 "build"
+  build:
+    # 执行作业所需的运行器 runner
+    runs-on: ${{ matrix.os }}
+    environment: build
+
+    strategy:
+      matrix:
+        os: [macOS, arm64]
+
     # 执行作业所需的运行器 runner
     steps:
     # 在 $GITHUB_WORKSPACE 下 checks-out 当前仓库，这样当前作业就可以访问该仓库
@@ -42,5 +57,5 @@ jobs:
     - name: Upload Artifact # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
       uses: actions/upload-artifact@v3
       with:
-        name: MacOS_x64
+        name: MacOS_arm64
         path: ./dist/app # 上传 dist 目录下的 app 执行文件
