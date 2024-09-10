@@ -20,17 +20,18 @@ jobs:
 
     strategy:
       matrix:
-        os: [macos-latest]
+        os: [macos-14]
+        # os: [macos-latest]
 
     # 执行作业所需的运行器 runner
     steps:
     # 在 $GITHUB_WORKSPACE 下 checks-out 当前仓库，这样当前作业就可以访问该仓库
-    - uses: actions/checkout@v3
-    - name: Set up Python 3.9.13
-      uses: actions/setup-python@v3
+    - uses: actions/checkout@v4
+    - name: Set up Python 3.9.19
+      uses: actions/setup-python@v4
       with:
         # 要使用的Python版本的版本范围或确切版本，使用SemVer的版本范围语法
-        python-version: "3.9.13"
+        python-version: "3.9.19"
         architecture: "arm64"
     # 使用运行器的终端来运行一个命令
     - name: Install dependencies
@@ -46,7 +47,7 @@ jobs:
         pyinstaller -F --clean --target-arch arm64 ./app.py
     # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
     - name: Upload Artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: MacOS_arm64
         path: ./dist/app # 上传 dist 目录下的 app 执行文件
