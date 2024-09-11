@@ -62,3 +62,5 @@ jobs:
       with:
         name: MacOS_x64
         path: MacOS_x64.tar
+        if-no-files-found: error
+        retention-days: 90
