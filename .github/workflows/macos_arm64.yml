@@ -52,7 +52,7 @@ jobs:
 
     # 上传构建产物，这里我们的源码目录是根目录，而实际运行的代码是构建后的 dist 目录
     - name: Upload Artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v4 # https://github.com/actions/upload-artifact?tab=readme-ov-file
       with:
         name: MacOS_arm64
         path: MacOS_arm64.tar
