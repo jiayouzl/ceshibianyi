@@ -52,10 +52,7 @@ jobs:
         rm -rf dist
         rm -rf app.spec
         pyinstaller -F --clean ./app.py
-    # 对其权限进行修改
-    - name: Change permissions
-      run: |
-        chmod +x ./dist/app
+        chmod +x ./dist/app  # 设置可执行的权限
     #- name: Create Zip Package # 创建压缩包
     #  run: |
     #    zip -r ./dist/MacOS_x64.zip ./dist/app
