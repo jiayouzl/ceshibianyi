@@ -61,7 +61,7 @@ jobs:
       uses: actions/upload-artifact@v4 # https://github.com/actions/upload-artifact
       with:
         name: MacOS_arm64
-        path: MacOS_arm64.tar
+        path: MacOS_arm64.tar # 用tar是为了保持编译后的命令行工具带可执行权限
         # path: ./dist/app # 上传 dist 目录下的 app 执行文件
         if-no-files-found: error
         retention-days: 90
