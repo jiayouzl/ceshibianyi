@@ -31,7 +31,7 @@ jobs:
       uses: actions/setup-python@v5
       with:
         # 要使用的Python版本的版本范围或确切版本，使用SemVer的版本范围语法
-        python-version: "3.9.13"
+        python-version: "3.9.20"
         architecture: "arm64"
     # 使用运行器的终端来运行一个命令
     - name: Install dependencies
