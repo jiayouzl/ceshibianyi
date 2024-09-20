@@ -1,4 +1,4 @@
 requests==2.32.3
 pyinstaller==6.10.0
 pyinstaller-hooks-contrib==2024.8
-setuptools==74.1.2
+setuptools==75.1.0
