@@ -44,7 +44,12 @@ jobs:
         rm -rf build
         rm -rf dist
         rm -rf app.spec
-        pyinstaller -F --clean --target-arch arm64 ./app.py
+        # 编译通用arm64架构应用
+        # pyinstaller -F --clean --target-arch arm64 ./app.py
+        # 编译通用x86_64架构应用
+        # pyinstaller -F --clean --target-architecture=x86_64 ./app.py
+        # 编译通用arm64,x64架构应用
+        pyinstaller -F --clean --target-architecture=universal2 ./app.py
         chmod +x ./dist/app
         cd ./dist && tar -cvf ../MacOS_arm64.tar app
         # cd ./dist && tar -cvf my_files.tar /path/to/my/directory
