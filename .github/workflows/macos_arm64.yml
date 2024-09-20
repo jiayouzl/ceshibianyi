@@ -33,7 +33,7 @@ jobs:
         # 要使用的Python版本的版本范围或确切版本，使用SemVer的版本范围语法
         # https://raw.githubusercontent.com/actions/python-versions/main/versions-manifest.json
         python-version: "3.12.6"
-        architecture: "x64"
+        architecture: "arm64"
     # 使用运行器的终端来运行一个命令
     - name: Install dependencies
       run: |
@@ -46,11 +46,11 @@ jobs:
         rm -rf dist
         rm -rf app.spec
         # 编译通用arm64架构应用
-        # pyinstaller -F --clean --target-arch arm64 ./app.py
+        pyinstaller -F --clean --target-arch arm64 ./app.py
         # 编译通用x86_64架构应用
         # pyinstaller -F --clean --target-architecture=x86_64 ./app.py
         # 编译通用arm64,x64架构应用
-        pyinstaller -F --clean --target-architecture=universal2 ./app.py
+        # pyinstaller -F --clean --target-architecture=universal2 ./app.py
         chmod +x ./dist/app
         cd ./dist && tar -cvf ../MacOS_arm64.tar app
         # cd ./dist && tar -cvf my_files.tar /path/to/my/directory
